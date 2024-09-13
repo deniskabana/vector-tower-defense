@@ -489,8 +489,8 @@ MonoBehaviour:
   - {fileID: 580751156089435288}
   targetRange: 1.6
   rotationSpeed: 400
-  fireRatePerSecond: 2
-  towerPrice: 115
+  fireRatePerSecond: 1.65
+  towerPrice: 320
   buildTime: 3
   damage: 2
   bulletTargetStyle: 1

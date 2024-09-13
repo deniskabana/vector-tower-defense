@@ -457,11 +457,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4586320413646119053, guid: ec89eaab241694d198a008cf28c6e323, type: 3}
   firingPoints:
   - {fileID: 1865896256224885968}
-  disableDefaultFiring: 0
   targetRange: 1.9
   rotationSpeed: 400
-  fireRatePerSecond: 3
-  towerPrice: 115
+  fireRatePerSecond: 2.5
+  towerPrice: 145
   buildTime: 1
   damage: 1
   bulletTargetStyle: 0
