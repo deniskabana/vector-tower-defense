@@ -55,13 +55,10 @@ public class BaseTurret : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
-        {
-            FindTarget();
-            return;
-        }
-
         RotateTowardsTarget();
+
+        if (target == null)
+            FindTarget();
 
         if (!CheckTargetInRange())
         {
@@ -69,11 +66,15 @@ public class BaseTurret : MonoBehaviour
         }
         else
         {
-            timeUntilFire += Time.deltaTime;
-            if (timeUntilFire >= 1f / fireRatePerSecond)
+            if (timeUntilFire <= 0f)
             {
                 Shoot();
-                timeUntilFire = 0f;
+                FindTarget();
+                timeUntilFire = 1f / fireRatePerSecond;
+            }
+            else
+            {
+                timeUntilFire -= Time.deltaTime;
             }
         }
     }
@@ -88,7 +89,7 @@ public class BaseTurret : MonoBehaviour
 
         if (colliders.Length > 0)
         {
-            int highestScore = int.MinValue;
+            float highestScore = float.MinValue;
             Transform bestTarget = null;
 
             foreach (Collider2D collider in colliders)
@@ -96,7 +97,7 @@ public class BaseTurret : MonoBehaviour
                 EnemyMovement enemyMovement = collider.GetComponent<EnemyMovement>();
                 if (enemyMovement != null)
                 {
-                    int score = enemyMovement.GetOnMapScore();
+                    float score = enemyMovement.GetOnMapScore();
                     if (score > highestScore)
                     {
                         highestScore = score;
@@ -111,6 +112,9 @@ public class BaseTurret : MonoBehaviour
 
     private bool CheckTargetInRange()
     {
+        if (target == null)
+            return false;
+
         return Vector2.Distance(target.position, transform.position) <= targetRange;
     }
 

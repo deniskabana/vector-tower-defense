@@ -14,21 +14,38 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
     private GameObject hoverImage;
 
     private Sprite previewImage;
+
     private bool initialized = false;
+
+    void Start()
+    {
+        ShopManager.main.OnTowerSelected += HandleTowerSelectHoverStatus;
+    }
 
     void Update()
     {
         if (!initialized && BuildManager.main != null)
         {
-            SetActive();
+            Initialize();
         }
     }
 
-    private void SetActive()
+    private void HandleTowerSelectHoverStatus(int index)
+    {
+        if (index != towerIndex)
+        {
+            hoverImage.SetActive(false);
+        }
+        else
+        {
+            hoverImage.SetActive(false);
+        }
+    }
+
+    private void Initialize()
     {
         Tower[] towers = BuildManager.main.towers;
         previewImage = towers[towerIndex].towerPreview;
-        hoverImage.GetComponent<UnityEngine.UI.Image>().sprite = previewImage;
         hoverImage.SetActive(false);
         initialized = true;
     }

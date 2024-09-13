@@ -20,8 +20,11 @@ public class EnemyHealth : MonoBehaviour
 
         if (hitpoints <= 0 && !isDead)
         {
-            isDead = true;
+            EnemySplitter enemySplitter = GetComponent<EnemySplitter>();
+            enemySplitter?.SplitIfPossible();
+
             EnemySpawner.onEnemyDestroy.Invoke();
+            isDead = true;
             LevelManager.main.IncreaseCurrency(currencyReward);
             Destroy(gameObject);
         }

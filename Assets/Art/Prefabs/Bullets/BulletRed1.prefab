@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.29
 --- !u!114 &4049862481719311401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5638211895075841519}
-  speed: 4.5
-  lifeTime: 0.4
+  speed: 3
+  lifeTime: 0.25
 --- !u!50 &5638211895075841519
 Rigidbody2D:
   serializedVersion: 4

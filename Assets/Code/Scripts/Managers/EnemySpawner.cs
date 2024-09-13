@@ -36,9 +36,14 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private float timeSinceLastSpawn;
-    private int enemiesAlive;
-    private int enemiesLeftToSpawn;
+    public int enemiesAlive;
+    public int enemiesLeftToSpawn;
     private bool isSpawning = false;
+
+    public void AddCustomEnemy()
+    {
+        enemiesAlive++;
+    }
 
     void Awake()
     {

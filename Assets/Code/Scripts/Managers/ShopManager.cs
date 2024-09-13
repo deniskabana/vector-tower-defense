@@ -49,6 +49,9 @@ public class ShopManager : MonoBehaviour
     private BuildingSpace buildingSpace;
     private BuildingSpace previousBuildingSpace;
 
+    public delegate void OnTowerSelectedAction(int index);
+    public event OnTowerSelectedAction OnTowerSelected;
+
     void Awake()
     {
         main = this;
@@ -129,6 +132,7 @@ public class ShopManager : MonoBehaviour
     public void SetSelectedTower(int index)
     {
         BuildManager.main.SelectTower(index);
+        OnTowerSelected?.Invoke(index);
 
         if (index == -1)
         {

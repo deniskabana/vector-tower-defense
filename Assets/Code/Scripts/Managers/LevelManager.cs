@@ -73,7 +73,10 @@ public class LevelManager : MonoBehaviour
 
         if (lives <= 0)
         {
-            // TODO: GameManager.main.GameOver();
+            // Restart scene
+            UnityEngine.SceneManagement.SceneManager.LoadScene(
+                UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+            );
         }
     }
 

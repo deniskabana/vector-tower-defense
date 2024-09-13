@@ -13,19 +13,26 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 10f;
 
-    private Transform targetPoint;
-    private int pathIndex = 0;
+    public Transform targetPoint;
+    public int pathIndex = 0;
 
-    private int onMapScore = 0;
+    public float onMapScore = 0;
 
     void Start()
     {
-        targetPoint = LevelManager.main.path[0];
+        if (targetPoint == null)
+            targetPoint = LevelManager.main.path[0];
+    }
+
+    public void SetTargetPoint(Transform newTargetPoint, int newPathIndex)
+    {
+        targetPoint = newTargetPoint;
+        pathIndex = newPathIndex;
     }
 
     void Update()
     {
-        onMapScore++;
+        onMapScore += moveSpeed;
 
         if (Vector2.Distance(targetPoint.position, transform.position) <= 0.1f)
         {
@@ -46,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public int GetOnMapScore()
+    public float GetOnMapScore()
     {
         return onMapScore;
     }

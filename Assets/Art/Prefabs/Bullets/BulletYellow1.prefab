@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3244660404924492982}
   - component: {fileID: 4049862481719311401}
   m_Layer: 8
-  m_Name: BulletGreen1
+  m_Name: BulletYellow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4956658e304614bf987d4277563bb313, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bcf00ca095f84b07909a44500d4f6ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.26
+  m_Radius: 0.29
 --- !u!50 &3244660404924492982
 Rigidbody2D:
   serializedVersion: 4
@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3244660404924492982}
-  speed: 2.5
-  lifeTime: 1.99
+  speed: 6.13
+  lifeTime: 0.71
