@@ -1,0 +1,82 @@
+{
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.vs": true,
+    "**/.gitmodules": true,
+    "**/.vsconfig": true,
+    "**/*.booproj": true,
+    "**/*.pidb": true,
+    "**/*.suo": true,
+    "**/*.user": true,
+    "**/*.userprefs": true,
+    "**/*.unityproj": true,
+    "**/*.dll": true,
+    "**/*.exe": true,
+    "**/*.pdf": true,
+    "**/*.mid": true,
+    "**/*.midi": true,
+    "**/*.wav": true,
+    "**/*.gif": true,
+    "**/*.ico": true,
+    "**/*.jpg": true,
+    "**/*.jpeg": true,
+    "**/*.png": true,
+    "**/*.psd": true,
+    "**/*.tga": true,
+    "**/*.tif": true,
+    "**/*.tiff": true,
+    "**/*.3ds": true,
+    "**/*.3DS": true,
+    "**/*.fbx": true,
+    "**/*.FBX": true,
+    "**/*.lxo": true,
+    "**/*.LXO": true,
+    "**/*.ma": true,
+    "**/*.MA": true,
+    "**/*.obj": true,
+    "**/*.OBJ": true,
+    "**/*.asset": true,
+    "**/*.cubemap": true,
+    "**/*.flare": true,
+    "**/*.mat": true,
+    "**/*.meta": true,
+    "**/*.prefab": true,
+    "**/*.unity": true,
+    "build/": true,
+    "Build/": true,
+    "Library/": true,
+    "library/": true,
+    "obj/": true,
+    "Obj/": true,
+    "Logs/": true,
+    "logs/": true,
+    "ProjectSettings/": true,
+    "UserSettings/": true,
+    "temp/": true,
+    "Temp/": true
+  },
+  "dotnet.defaultSolution": "VectorTowerDefense.sln",
+  "folder-customization.folders": [
+    {
+      "path": "VectorTowerDefense/Assets/Code/Scripts/",
+      "color": "foldercustomization.AnsiColor220"
+    },
+    {
+      "path": "VectorTowerDefense/Assets/Code/Scripts/Managers/",
+      "color": "foldercustomization.AnsiColor112"
+    },
+    {
+      "path": "VectorTowerDefense/Assets/Code/Scripts/Enemy/",
+      "color": "foldercustomization.AnsiColor197"
+    },
+    {
+      "path": "VectorTowerDefense/Assets/Code/Scripts/Turrets/",
+      "color": "foldercustomization.AnsiColor79"
+    }
+  ],
+  "editor.defaultFormatter": null,
+  "[csharp]": {
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  }
+}
