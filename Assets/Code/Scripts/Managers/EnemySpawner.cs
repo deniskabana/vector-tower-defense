@@ -115,6 +115,12 @@ public class EnemySpawner : MonoBehaviour
     private GameObject[] GetEnemiesForCurrentWave()
     {
         int currentWave = LevelManager.main.currentWave;
+
+        if (currentWave >= waveConfigs.Length)
+        {
+            return enemyPrefabs;
+        }
+
         foreach (var waveConfig in waveConfigs)
         {
             if (waveConfig.waveNumber == currentWave)
@@ -122,6 +128,7 @@ public class EnemySpawner : MonoBehaviour
                 return waveConfig.enemyTypes;
             }
         }
+
         // If no specific configuration is found for the current wave, return all enemy types
         return enemyPrefabs;
     }

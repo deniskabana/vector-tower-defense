@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.5, y: 5, z: 0}
-  m_LocalScale: {x: 0.23, y: 0.23, z: 1}
+  m_LocalScale: {x: 0.27, y: 0.27, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -133,6 +133,7 @@ MonoBehaviour:
   moveSpeed: 8.5
   targetPoint: {fileID: 0}
   pathIndex: 0
+  onMapScore: 0
 --- !u!114 &1450549098992498243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1260debf8b94a31a656dad8a511cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 24
+  hitpoints: 20
   currencyReward: 10
   maxHitpoints: 0
 --- !u!114 &4599995670982453205
@@ -215,3 +216,6 @@ MonoBehaviour:
   - {fileID: 112923064240908923, guid: 1f419f387b54f40f0999a7a9474aea1a, type: 3}
   - {fileID: 112923064240908923, guid: 4f4b3490a34684dc4b9d161bbed60307, type: 3}
   - {fileID: 112923064240908923, guid: fc0c534a2e9d444f2aab4a8549b71d88, type: 3}
+  - {fileID: 112923064240908923, guid: 9ecdd9552b0b14aa085729e649d2869a, type: 3}
+  - {fileID: 112923064240908923, guid: 8b74afc60fa1f45c7bb83487a5b65b9c, type: 3}
+  delayBetweenSplits: 0.08

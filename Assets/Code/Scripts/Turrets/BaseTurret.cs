@@ -58,24 +58,26 @@ public class BaseTurret : MonoBehaviour
         RotateTowardsTarget();
 
         if (target == null)
+        {
             FindTarget();
+        }
 
         if (!CheckTargetInRange())
         {
             target = null;
         }
+
+        if (timeUntilFire <= 0f)
+        {
+            if (target == null)
+                return;
+            Shoot();
+            FindTarget();
+            timeUntilFire = 1f / fireRatePerSecond;
+        }
         else
         {
-            if (timeUntilFire <= 0f)
-            {
-                Shoot();
-                FindTarget();
-                timeUntilFire = 1f / fireRatePerSecond;
-            }
-            else
-            {
-                timeUntilFire -= Time.deltaTime;
-            }
+            timeUntilFire -= Time.deltaTime;
         }
     }
 

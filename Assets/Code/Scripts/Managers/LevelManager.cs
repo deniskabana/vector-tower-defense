@@ -8,8 +8,9 @@ public class LevelManager : MonoBehaviour
     public Transform startPoint;
     public Transform[] path;
 
+    public float endWaveRewardBase = 40f;
+    public float endWaveRewardCoef = 0.2f;
     public int currency;
-    public int startingCurrency;
     public int lives;
     public int gameSpeed = 1;
     public int currentWave = 0;
@@ -29,7 +30,6 @@ public class LevelManager : MonoBehaviour
         if (main == null)
             main = this;
 
-        currency = startingCurrency;
         UIManager.main.UIInitialize(currentWave, currency, lives);
 
         QualitySettings.vSyncCount = 0;
@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
     {
         isWaveInProgress = false;
         UIPlayButton.main.OnEndWave();
+        IncreaseCurrency(Mathf.FloorToInt(endWaveRewardBase * (endWaveRewardCoef * currentWave)));
     }
 
     public int SetGameSpeed(int speed)

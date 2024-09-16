@@ -10,28 +10,37 @@ public class EnemySplitter : MonoBehaviour
     [SerializeField]
     public GameObject[] prefabs;
 
+    [SerializeField]
+    private float delayBetweenSplits = 0.08f;
+
     private bool hasPerformed = false;
 
     public void SplitIfPossible()
     {
-        SpawnEnemies();
+        StartCoroutine(SpawnEnemies());
     }
 
-    private void SpawnEnemies()
+    private IEnumerator SpawnEnemies()
     {
-        if (hasPerformed)
-            return;
-
-        for (int i = 0; i < prefabs.Length; i++)
+        if (!hasPerformed)
         {
-            GameObject newEnemy = Instantiate(prefabs[i], transform.position, Quaternion.identity);
-            EnemyMovement movementScript = GetComponent<EnemyMovement>();
-            Transform target = movementScript.targetPoint;
-            int pathIndex = movementScript.pathIndex;
-            newEnemy.GetComponent<EnemyMovement>().onMapScore = movementScript.onMapScore;
-            newEnemy.GetComponent<EnemyMovement>().SetTargetPoint(target, pathIndex);
-            EnemySpawner.main.AddCustomEnemy();
+            for (int i = 0; i < prefabs.Length; i++)
+            {
+                GameObject newEnemy = Instantiate(
+                    prefabs[i],
+                    transform.position,
+                    Quaternion.identity
+                );
+                EnemyMovement newEnemyMovement = newEnemy.GetComponent<EnemyMovement>();
+                EnemyMovement movementScript = GetComponent<EnemyMovement>();
+                Transform target = movementScript.targetPoint;
+                int pathIndex = movementScript.pathIndex;
+                newEnemyMovement.onMapScore = movementScript.onMapScore;
+                newEnemyMovement.SetTargetPoint(target, pathIndex);
+                EnemySpawner.main.AddCustomEnemy();
+                yield return new WaitForSeconds(delayBetweenSplits);
+            }
+            hasPerformed = true;
         }
-        hasPerformed = true;
     }
 }
