@@ -75,8 +75,9 @@
       "color": "foldercustomization.AnsiColor79"
     }
   ],
-  "editor.defaultFormatter": null,
+  "editor.defaultFormatter": "ms-dotnettools.csharp",
   "[csharp]": {
     "editor.defaultFormatter": "csharpier.csharpier-vscode"
-  }
+  },
+  "omnisharp.organizeImportsOnFormat": true
 }
