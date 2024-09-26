@@ -4,48 +4,31 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum BulletTargetStyle
+{
+    AngularTowardsEnemy,
+    AngularFromCenter,
+}
 public class BaseTurret : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField]
-    private Transform turretRotationPoint;
-
-    [SerializeField]
-    private LayerMask enemyLayerMask;
-
-    [SerializeField]
-    private GameObject bulletPrefab;
-
-    [SerializeField]
-    private Transform[] firingPoints;
+    [SerializeField] private Transform turretRotationPoint;
+    [SerializeField] private LayerMask enemyLayerMask;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform[] firingPoints;
 
     [Header("Attributes")]
-    [SerializeField]
-    public float targetRange = 5f;
+    [SerializeField] public float targetRange = 5f;
+    [SerializeField] public float rotationSpeed = 400f;
+    [SerializeField] public float fireRatePerSecond = 1f;
+    [SerializeField] public int towerPrice = 65;
+    [SerializeField] public float buildTime = 1;
+    [SerializeField] public int damage = 1;
+    [SerializeField] public BulletTargetStyle bulletTargetStyle = BulletTargetStyle.AngularTowardsEnemy;
 
-    [SerializeField]
-    public float rotationSpeed = 400f;
-
-    [SerializeField]
-    public float fireRatePerSecond = 1f;
-
-    [SerializeField]
-    public int towerPrice = 65;
-
-    [SerializeField]
-    public float buildTime = 1;
-
-    [SerializeField]
-    public int damage = 1;
-
-    public enum BulletTargetStyle
-    {
-        AngularTowardsEnemy,
-        AngularFromCenter,
-    }
-
-    [SerializeField]
-    public BulletTargetStyle bulletTargetStyle = BulletTargetStyle.AngularTowardsEnemy;
+    [Header("SFX")]
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip bulletSound;
 
     private Transform target;
     private float timeUntilFire;
@@ -166,8 +149,11 @@ public class BaseTurret : MonoBehaviour
                     break;
             }
             bulletScript.SetDamage(damage);
+            bulletScript.bulletSound = bulletSound;
         }
 
         OnShot?.Invoke();
+        if (shootSound != null)
+            SoundManager.PlayAudioClip(shootSound);
     }
 }

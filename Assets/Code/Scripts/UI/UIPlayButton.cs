@@ -69,6 +69,7 @@ public class UIPlayButton : MonoBehaviour, IPointerClickHandler
         }
 
         RefreshSprite();
+        UIManager.main?.PlayUIClickSound();
     }
 
     public void RefreshSprite()

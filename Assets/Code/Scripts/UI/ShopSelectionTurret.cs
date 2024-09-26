@@ -38,7 +38,7 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            hoverImage.SetActive(false);
+            hoverImage.SetActive(true);
         }
     }
 
@@ -52,6 +52,7 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
+        // TODO: Make interaction much more intuitive and user-friendly
         EventSystem.current.SetSelectedGameObject(null);
 
         if (BuildManager.main.selectedTower == towerIndex)

@@ -5,16 +5,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField]
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     [Header("Attributes")]
-    [SerializeField]
-    private float speed = 10f;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float lifeTime = 5f;
 
-    [SerializeField]
-    private float lifeTime = 5f;
-
+    public AudioClip bulletSound;
     private int bulletDamage = 0;
     private Transform target = null;
     private float lifecycleTimer;
@@ -27,9 +24,7 @@ public class Bullet : MonoBehaviour
         // Delete if surpassed expected lifetime
         lifecycleTimer += Time.deltaTime;
         if (lifecycleTimer >= lifeTime || target == null)
-        {
             Destroy(gameObject);
-        }
     }
 
     public void SetTarget(Transform _target)
@@ -61,6 +56,8 @@ public class Bullet : MonoBehaviour
     {
         other.gameObject.GetComponent<EnemyHealth>().TakeDamage(bulletDamage);
         UIManager.main.UIUpdateCurrency(LevelManager.main.currency);
+        if (bulletSound != null)
+            SoundManager.PlayAudioClip(bulletSound);
         Destroy(gameObject);
     }
 }

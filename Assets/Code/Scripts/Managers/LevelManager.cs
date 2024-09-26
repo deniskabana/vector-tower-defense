@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
         EnemySpawner.main.StartSpawning();
         isWaveInProgress = true;
 
+        SoundManager.PlaySound(SoundType.START_WAVE);
         UIManager.main.UIUpdateWave(currentWave);
     }
 

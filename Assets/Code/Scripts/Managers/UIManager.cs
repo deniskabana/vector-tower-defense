@@ -23,6 +23,29 @@ public class UIManager : MonoBehaviour
     private string originalLivesText;
     private bool initialized = false;
 
+    public bool isUIHovered = false;
+
+    public bool IsUIHovered()
+    {
+        return isUIHovered;
+    }
+
+    public void SetUIHoverState(bool state)
+    {
+        isUIHovered = state;
+    }
+
+    public void PlayUIClickSound()
+    {
+        SoundManager.PlaySound(SoundType.UI_CLICK);
+    }
+
+    public void ShowNotification(string message)
+    {
+        // TODO: implement notification system
+        Debug.Log("Notification: " + message);
+    }
+
     void Awake()
     {
         main = this;

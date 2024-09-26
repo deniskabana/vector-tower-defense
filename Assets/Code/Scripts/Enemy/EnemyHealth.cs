@@ -24,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
             enemySplitter?.SplitIfPossible();
 
             EnemySpawner.onEnemyDestroy.Invoke();
+            SoundManager.PlaySound(SoundType.ENEMY_DEATH);
             isDead = true;
             LevelManager.main.IncreaseCurrency(currencyReward);
             Destroy(gameObject);

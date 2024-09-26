@@ -96,6 +96,9 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShop()
     {
+        if (isShopOpen)
+            return;
+
         SetSelectedTower(-1);
         HandleCurrencyChange(LevelManager.main.currency);
         isShopOpen = true;

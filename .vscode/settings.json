@@ -77,7 +77,7 @@
   ],
   "editor.defaultFormatter": "ms-dotnettools.csharp",
   "[csharp]": {
-    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
   },
   "omnisharp.organizeImportsOnFormat": true
 }
