@@ -22,6 +22,7 @@ public class SoundManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private SoundList[] soundList;
     [SerializeField] private AudioClip[] backgroundMusic;
+    [SerializeField][Range(0, 1)] private float soundToMusicVolume = 0.65f;
 
     private float musicVolume = 1;
     private float soundVolume = 1;
@@ -57,20 +58,24 @@ public class SoundManager : MonoBehaviour
             backgroundMusicSource.loop = false; // We will handle looping manually
 
             // Start playing the shuffled music
-            PlayNextMusicTrack();
+            StartCoroutine(PlayNextMusicTrack());
         }
     }
 
-    private void PlayNextMusicTrack()
+    IEnumerator PlayNextMusicTrack()
     {
-        if (shuffledMusic.Count == 0) return;
+        while (true)
+        {
+            if (shuffledMusic.Count == 0) yield break;
 
-        backgroundMusicSource.clip = shuffledMusic[currentTrackIndex];
-        backgroundMusicSource.Play();
-        currentTrackIndex = (currentTrackIndex + 1) % shuffledMusic.Count;
+            backgroundMusicSource.clip = shuffledMusic[currentTrackIndex];
+            backgroundMusicSource.Play();
+            backgroundMusicSource.volume = musicVolume;
+            currentTrackIndex = (currentTrackIndex + 1) % shuffledMusic.Count;
 
-        // Schedule the next track to play after the current one finishes
-        Invoke(nameof(PlayNextMusicTrack), backgroundMusicSource.clip.length);
+            // Wait for the current track to finish before playing the next one
+            yield return new WaitForSeconds(backgroundMusicSource.clip.length);
+        }
     }
 
     private void Shuffle(List<AudioClip> list)
@@ -104,12 +109,12 @@ public class SoundManager : MonoBehaviour
         }
 
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.audioSource.PlayOneShot(randomClip, volume);
+        instance.audioSource.PlayOneShot(randomClip, volume * instance.soundVolume * instance.soundToMusicVolume);
     }
 
     public static void PlayAudioClip(AudioClip clip, float volume = 1)
     {
-        instance.audioSource.PlayOneShot(clip, volume);
+        instance.audioSource.PlayOneShot(clip, volume * instance.soundVolume * instance.soundToMusicVolume);
     }
 
     public static void SetMusicVolume(float volume)

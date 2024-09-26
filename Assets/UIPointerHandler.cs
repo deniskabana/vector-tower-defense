@@ -6,16 +6,16 @@ using UnityEngine.EventSystems;
 
 public class UIPointerHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public void OnMouseEnter()
-    {
+    // public void OnMouseEnter()
+    // {
 
-        UIManager.main?.SetUIHoverState(true);
-    }
+    //     UIManager.main?.SetUIHoverState(true);
+    // }
 
-    public void OnMouseExit()
-    {
-        UIManager.main?.SetUIHoverState(false);
-    }
+    // public void OnMouseExit()
+    // {
+    //     UIManager.main?.SetUIHoverState(false);
+    // }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

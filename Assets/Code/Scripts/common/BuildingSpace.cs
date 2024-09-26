@@ -28,19 +28,12 @@ public class BuildingSpace : MonoBehaviour
 	{
 		if (UIManager.main.IsUIHovered())
 		{
-			Debug.Log("blocking click through UI");
 			return;
 		}
 
 		if (tower != null)
 		{
 			Debug.Log("upgrading tower");
-			return;
-		}
-
-		if (ShopManager.main.IsShopOpen())
-		{
-			Debug.Log("moving focus elsewhere");
 			return;
 		}
 

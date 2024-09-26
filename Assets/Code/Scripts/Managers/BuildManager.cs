@@ -8,8 +8,7 @@ public class BuildManager : MonoBehaviour
     public static BuildManager main;
 
     [Header("References")]
-    [SerializeField]
-    public Tower[] towers;
+    [SerializeField] public Tower[] towers;
 
     public int selectedTower = -1; // -1 = no tower selected
 
@@ -20,7 +19,9 @@ public class BuildManager : MonoBehaviour
 
     public Tower GetSelectedTower()
     {
-        return towers[Mathf.Clamp(selectedTower, 0, towers.Length - 1)];
+        if (selectedTower < 0 || selectedTower >= towers.Length)
+            return null;
+        return towers[selectedTower];
     }
 
     public void SelectTower(int index)

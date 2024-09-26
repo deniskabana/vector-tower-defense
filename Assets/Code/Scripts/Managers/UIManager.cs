@@ -9,14 +9,9 @@ public class UIManager : MonoBehaviour
     public static UIManager main;
 
     [Header("References")]
-    [SerializeField]
-    public TMP_Text waveText;
-
-    [SerializeField]
-    public TMP_Text currencyText;
-
-    [SerializeField]
-    public TMP_Text livesText;
+    [SerializeField] public TMP_Text waveText;
+    [SerializeField] public TMP_Text currencyText;
+    [SerializeField] public TMP_Text livesText;
 
     private string originalWaveText;
     private string originalCurrencyText;

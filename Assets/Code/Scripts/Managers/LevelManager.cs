@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
     {
         isWaveInProgress = false;
         UIPlayButton.main.OnEndWave();
+        SoundManager.PlaySound(SoundType.WAVE_COMPLETED);
         IncreaseCurrency(Mathf.FloorToInt(endWaveRewardBase * (endWaveRewardCoef * currentWave)));
     }
 
@@ -71,6 +72,7 @@ public class LevelManager : MonoBehaviour
     {
         lives--;
         UIManager.main.UIUpdateLivesLeft(lives);
+        SoundManager.PlaySound(SoundType.LIFE_LOST);
         OnLivesChanged?.Invoke(lives);
 
         if (lives <= 0)

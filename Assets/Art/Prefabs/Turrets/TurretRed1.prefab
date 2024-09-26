@@ -494,6 +494,8 @@ MonoBehaviour:
   buildTime: 3
   damage: 3
   bulletTargetStyle: 1
+  shootSound: {fileID: 8300000, guid: 7836aa1cd33114788b6568afc9c75859, type: 3}
+  bulletSound: {fileID: 0}
 --- !u!58 &8078052285955899170
 CircleCollider2D:
   m_ObjectHideFlags: 0

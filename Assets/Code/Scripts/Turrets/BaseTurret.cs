@@ -154,6 +154,8 @@ public class BaseTurret : MonoBehaviour
 
         OnShot?.Invoke();
         if (shootSound != null)
+        {
             SoundManager.PlayAudioClip(shootSound);
+        }
     }
 }

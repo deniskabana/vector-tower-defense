@@ -7,13 +7,8 @@ using UnityEngine.UI;
 public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
 {
     [Header("Attributes")]
-    [SerializeField]
-    private int towerIndex;
-
-    [SerializeField]
-    private GameObject hoverImage;
-
-    private Sprite previewImage;
+    [SerializeField] private int towerIndex;
+    [SerializeField] private GameObject hoverImage;
 
     private bool initialized = false;
 
@@ -45,7 +40,6 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
     private void Initialize()
     {
         Tower[] towers = BuildManager.main.towers;
-        previewImage = towers[towerIndex].towerPreview;
         hoverImage.SetActive(false);
         initialized = true;
     }
@@ -53,7 +47,6 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         // TODO: Make interaction much more intuitive and user-friendly
-        EventSystem.current.SetSelectedGameObject(null);
 
         if (BuildManager.main.selectedTower == towerIndex)
         {
@@ -61,6 +54,7 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
             return;
         }
         ShopManager.main.SetSelectedTower(towerIndex);
+        UIManager.main?.PlayUIClickSound();
         hoverImage.SetActive(true);
     }
 }

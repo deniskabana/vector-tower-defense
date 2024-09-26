@@ -8,38 +8,17 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField]
-    public GameObject shopPanel;
-
-    [SerializeField]
-    public TMP_Text nameText;
-
-    [SerializeField]
-    public TMP_Text costText;
-
-    [SerializeField]
-    public TMP_Text fireRateText;
-
-    [SerializeField]
-    public TMP_Text damageText;
-
-    [SerializeField]
-    public TMP_Text buildTimeText;
-
-    [SerializeField]
-    public GameObject noTowerSelected;
-
-    [SerializeField]
-    public GameObject towerDetails;
-
-    [SerializeField]
-    public GameObject purchaseButton;
-
-    [SerializeField]
-    public GameObject notEnoughCashButton;
-
-    [SerializeField]
-    public GameObject previewImage;
+    [SerializeField] public GameObject shopPanel;
+    [SerializeField] public TMP_Text nameText;
+    [SerializeField] public TMP_Text costText;
+    [SerializeField] public TMP_Text fireRateText;
+    [SerializeField] public TMP_Text damageText;
+    [SerializeField] public TMP_Text buildTimeText;
+    [SerializeField] public GameObject noTowerSelected;
+    [SerializeField] public GameObject towerDetails;
+    [SerializeField] public GameObject purchaseButton;
+    [SerializeField] public GameObject notEnoughCashButton;
+    [SerializeField] public GameObject previewImage;
 
     public static ShopManager main;
     private string originalFireRateText;
@@ -99,16 +78,18 @@ public class ShopManager : MonoBehaviour
         if (isShopOpen)
             return;
 
-        SetSelectedTower(-1);
         HandleCurrencyChange(LevelManager.main.currency);
+        SoundManager.PlaySound(SoundType.MENU_SHOW);
         isShopOpen = true;
         shopPanel.SetActive(true);
+        SetSelectedTower(0);
     }
 
     public void CloseShop()
     {
         shopPanel.SetActive(false);
         isShopOpen = false;
+        SoundManager.PlaySound(SoundType.MENU_CLOSE);
         previousBuildingSpace?.Reset();
         buildingSpace?.Reset();
         previousBuildingSpace = null;
@@ -119,6 +100,7 @@ public class ShopManager : MonoBehaviour
 
     public void SetBuildingSpace(BuildingSpace newBuildingSpace)
     {
+
         if (newBuildingSpace == null)
         {
             previousBuildingSpace = buildingSpace;
@@ -130,6 +112,7 @@ public class ShopManager : MonoBehaviour
         previousBuildingSpace = buildingSpace;
         buildingSpace = newBuildingSpace;
         previousBuildingSpace?.Reset();
+        RenderBuildingSpacePreview();
     }
 
     public void SetSelectedTower(int index)
@@ -153,10 +136,7 @@ public class ShopManager : MonoBehaviour
             noTowerSelected.SetActive(false);
             towerDetails.SetActive(true);
             previewImage.GetComponent<UnityEngine.UI.Image>().sprite = selectedTower.towerPreview;
-            buildingSpace?.ShowTowerPreview(selectedTower.towerPreview);
-            // UI draw tower range preview
-            buildingSpace?.ClearRange();
-            buildingSpace?.DrawRange(turretScript.targetRange);
+            RenderBuildingSpacePreview();
             // UI text mutations
             nameText.text = selectedTower.name;
             nameText.color = selectedTower.color;
@@ -167,6 +147,22 @@ public class ShopManager : MonoBehaviour
         }
 
         HandleCurrencyChange(LevelManager.main.currency);
+    }
+
+    public void RenderBuildingSpacePreview()
+    {
+        if (buildingSpace == null)
+            return;
+
+        if (BuildManager.main.selectedTower < 0)
+            return;
+
+        Tower selectedTower = BuildManager.main.GetSelectedTower();
+        BaseTurret turretScript = selectedTower.prefab.GetComponent<BaseTurret>();
+        buildingSpace.ShowTowerPreview(selectedTower.towerPreview);
+        // UI draw tower range preview
+        buildingSpace?.ClearRange();
+        buildingSpace?.DrawRange(turretScript.targetRange);
     }
 
     private void HandleCurrencyChange(int newCurrency)
