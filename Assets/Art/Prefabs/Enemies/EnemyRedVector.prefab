@@ -130,6 +130,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8045672166557488064}
   moveSpeed: 8
+  targetPoint: {fileID: 0}
+  pathIndex: 0
+  onMapScore: 0
 --- !u!114 &1450549098992498243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,5 +197,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoints: 18
-  currencyReward: 13
+  currencyReward: 6
   maxHitpoints: 0

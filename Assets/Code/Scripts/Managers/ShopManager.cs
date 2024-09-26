@@ -54,6 +54,9 @@ public class ShopManager : MonoBehaviour
         originalFireRateText = fireRateText.text;
         originalDamageText = damageText.text;
         originalBuildTimeText = buildTimeText.text;
+
+        // Default to first tower
+        SetSelectedTower(0);
     }
 
     public void PurchaseTower()

@@ -8125,7 +8125,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 84b753817a4404932801d01d76a3c115, type: 3}
   - {fileID: 8300000, guid: a3f3ae7e357b047b79b944cee628366c, type: 3}
   - {fileID: 8300000, guid: 78866718dd6e64281b7359c5cb7ae31b, type: 3}
-  soundToMusicVolume: 0.65
+  - {fileID: 8300000, guid: 8cd5a16e8b52148dda7349f99b99e685, type: 3}
+  - {fileID: 8300000, guid: cea9a7aecbcee497fa89ef4e3c411034, type: 3}
+  - {fileID: 8300000, guid: c512f3b763a1e43e295c600884f9b3f7, type: 3}
+  - {fileID: 8300000, guid: 9a79b79feda9c4d33a3f71cdc4ccf527, type: 3}
+  soundToMusicVolume: 0.7
+  pitchModulation: 0.15
 --- !u!82 &1920774835
 AudioSource:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SoundList[] soundList;
     [SerializeField] private AudioClip[] backgroundMusic;
     [SerializeField][Range(0, 1)] private float soundToMusicVolume = 0.65f;
+    [SerializeField][Range(0, 1)] private float pitchModulation = 0.1f;
 
     private float musicVolume = 1;
     private float soundVolume = 1;
@@ -109,12 +110,13 @@ public class SoundManager : MonoBehaviour
         }
 
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.audioSource.PlayOneShot(randomClip, volume * instance.soundVolume * instance.soundToMusicVolume);
+        instance.audioSource.PlayOneShot(randomClip, volume * instance.soundVolume * instance.soundToMusicVolume * (1 / Time.timeScale));
     }
 
     public static void PlayAudioClip(AudioClip clip, float volume = 1)
     {
-        instance.audioSource.PlayOneShot(clip, volume * instance.soundVolume * instance.soundToMusicVolume);
+        instance.audioSource.PlayOneShot(clip, volume * instance.soundVolume * instance.soundToMusicVolume * (1 / Time.timeScale));
+        instance.audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
     }
 
     public static void SetMusicVolume(float volume)

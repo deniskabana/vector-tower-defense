@@ -197,5 +197,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoints: 7
-  currencyReward: 7
+  currencyReward: 2
   maxHitpoints: 0
