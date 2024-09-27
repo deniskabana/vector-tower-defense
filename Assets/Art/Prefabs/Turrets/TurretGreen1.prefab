@@ -295,7 +295,8 @@ MonoBehaviour:
   damage: 5
   bulletTargetStyle: 0
   shootSound: {fileID: 8300000, guid: a324eee82ad6147f4b583d6cd36c72dc, type: 3}
-  bulletSound: {fileID: 8300000, guid: 1137d02b6e2f84f90ac9424de3424f0a, type: 3}
+  shootVolume: 0.73
+  bulletSound: {fileID: 0}
 --- !u!114 &8375334293260911767
 MonoBehaviour:
   m_ObjectHideFlags: 0

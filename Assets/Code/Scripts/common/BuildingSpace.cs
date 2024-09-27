@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class BuildingSpace : MonoBehaviour
+public class BuildingSpace : MonoBehaviour, IPointerClickHandler
 {
 	[Header("References")]
 	[SerializeField] private GameObject spriteObj;
@@ -24,13 +26,8 @@ public class BuildingSpace : MonoBehaviour
 		SetupLineRenderer();
 	}
 
-	void OnMouseDown()
+	public void OnPointerClick(PointerEventData pointerEvent)
 	{
-		if (UIManager.main.IsUIHovered())
-		{
-			return;
-		}
-
 		if (tower != null)
 		{
 			Debug.Log("upgrading tower");

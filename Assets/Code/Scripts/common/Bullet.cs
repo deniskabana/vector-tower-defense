@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
         other.gameObject.GetComponent<EnemyHealth>().TakeDamage(bulletDamage);
         UIManager.main.UIUpdateCurrency(LevelManager.main.currency);
         if (bulletSound != null)
-            SoundManager.PlayAudioClip(bulletSound);
+            SoundManager.PlaySoundEffect(bulletSound);
         Destroy(gameObject);
     }
 }

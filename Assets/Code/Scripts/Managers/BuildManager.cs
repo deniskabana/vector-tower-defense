@@ -10,7 +10,7 @@ public class BuildManager : MonoBehaviour
     [Header("References")]
     [SerializeField] public Tower[] towers;
 
-    public int selectedTower = -1; // -1 = no tower selected
+    public int selectedTower = 0; // -1 = no tower selected, 0 = first
 
     void Start()
     {

@@ -28,6 +28,7 @@ public class BaseTurret : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private AudioClip shootSound;
+    [SerializeField] private float shootVolume = 1f;
     [SerializeField] private AudioClip bulletSound;
 
     private Transform target;
@@ -155,7 +156,7 @@ public class BaseTurret : MonoBehaviour
         OnShot?.Invoke();
         if (shootSound != null)
         {
-            SoundManager.PlayAudioClip(shootSound);
+            SoundManager.PlaySoundEffect(shootSound, shootVolume);
         }
     }
 }

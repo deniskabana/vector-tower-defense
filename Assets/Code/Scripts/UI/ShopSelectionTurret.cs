@@ -39,9 +39,9 @@ public class ShopSelectionTurret : MonoBehaviour, IPointerClickHandler
 
     private void Initialize()
     {
-        Tower[] towers = BuildManager.main.towers;
         hoverImage.SetActive(false);
         initialized = true;
+        if (BuildManager.main.selectedTower == towerIndex) hoverImage.SetActive(true);
     }
 
     public void OnPointerClick(PointerEventData pointerEventData)

@@ -22,101 +22,120 @@ public class SoundManager : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private SoundList[] soundList;
     [SerializeField] private AudioClip[] backgroundMusic;
-    [SerializeField][Range(0, 1)] private float soundToMusicVolume = 0.65f;
+    [SerializeField][Range(0, 1)] private float maxSoundVolume = 0.65f;
     [SerializeField][Range(0, 1)] private float pitchModulation = 0.1f;
 
-    private float musicVolume = 1;
-    private float soundVolume = 1;
+    private float masterVolume = 1f;
+    private float musicVolume = 1f;
+    private float soundVolume = 1f;
 
     private static SoundManager instance;
     private AudioSource audioSource;
-    private AudioSource backgroundMusicSource;
 
+    private AudioSource backgroundMusicSource;
     private List<AudioClip> shuffledMusic;
     private int currentTrackIndex = 0;
+    private float trackTimer = 0f;
 
-    private void Start()
+    void Start()
     {
-        if (!Application.isPlaying)
-            return;
-
-        if (instance == null)
-        {
-            instance = this;
-        }
+        if (!Application.isPlaying) return;
+        if (instance == null) instance = this;
 
         audioSource = GetComponent<AudioSource>();
+        backgroundMusicSource = gameObject.AddComponent<AudioSource>();
 
-        // Handle music
         if (backgroundMusic.Length > 0)
         {
-            // Copy and shuffle the background music array
-            shuffledMusic = new List<AudioClip>(backgroundMusic);
-            Shuffle(shuffledMusic);
-
-            // Add AudioSource component
-            backgroundMusicSource = gameObject.AddComponent<AudioSource>();
-            backgroundMusicSource.loop = false; // We will handle looping manually
-
-            // Start playing the shuffled music
-            StartCoroutine(PlayNextMusicTrack());
+            PreloadMusicClips();
+            ShufflePlaylist();
         }
     }
 
-    IEnumerator PlayNextMusicTrack()
+    void Update()
     {
-        while (true)
+        if (backgroundMusicSource == null) return;
+        trackTimer -= Time.deltaTime;
+        if (trackTimer <= 0) PlayNextTrack();
+    }
+
+    public float GetMusicVolume()
+    {
+        return masterVolume * Mathf.Max(1, musicVolume);
+    }
+
+    public float GetSoundVolume()
+    {
+        return masterVolume * Mathf.Max(1, instance.soundVolume * instance.maxSoundVolume) * (1 / Time.timeScale);
+    }
+
+    private void PlayTrack(int index)
+    {
+        if (shuffledMusic?.Count == 0) return;
+
+        backgroundMusicSource.clip = shuffledMusic[index];
+        backgroundMusicSource.Play();
+        backgroundMusicSource.volume = musicVolume;
+        trackTimer = backgroundMusicSource.clip.length;
+    }
+
+    public static void PlayNextTrack()
+    {
+        if (instance.shuffledMusic?.Count == 0) return;
+        instance.currentTrackIndex += 1;
+
+        if (instance.currentTrackIndex >= instance.shuffledMusic.Count)
         {
-            if (shuffledMusic.Count == 0) yield break;
-
-            backgroundMusicSource.clip = shuffledMusic[currentTrackIndex];
-            backgroundMusicSource.Play();
-            backgroundMusicSource.volume = musicVolume;
-            currentTrackIndex = (currentTrackIndex + 1) % shuffledMusic.Count;
-
-            // Wait for the current track to finish before playing the next one
-            yield return new WaitForSeconds(backgroundMusicSource.clip.length);
+            instance.ShufflePlaylist();
+        }
+        else
+        {
+            instance.PlayTrack(instance.currentTrackIndex);
         }
     }
 
-    private void Shuffle(List<AudioClip> list)
+    public void ShufflePlaylist()
     {
-        for (int i = 0; i < list.Count; i++)
+        if (shuffledMusic == null) shuffledMusic = new List<AudioClip>(backgroundMusic);
+        if (backgroundMusicSource == null) backgroundMusicSource = gameObject.AddComponent<AudioSource>();
+        AudioClip lastTrackPlayed = backgroundMusicSource?.clip;
+
+        for (int i = 0; i < shuffledMusic.Count; i++)
         {
-            AudioClip temp = list[i];
-            int randomIndex = UnityEngine.Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            AudioClip clip = shuffledMusic[i];
+            int randomIndex = UnityEngine.Random.Range(i, shuffledMusic.Count);
+            shuffledMusic[i] = shuffledMusic[randomIndex];
+            shuffledMusic[randomIndex] = clip;
         }
+
+        // Make sure the same song doesn't play twice in a row
+        if (shuffledMusic[0] == lastTrackPlayed) shuffledMusic.Reverse();
+        currentTrackIndex = 0;
+        PlayTrack(currentTrackIndex);
     }
 
     private void OnDestroy()
     {
-        if (backgroundMusicSource != null)
-        {
-            backgroundMusicSource.Stop();
-            Destroy(backgroundMusicSource);
-        }
+        if (backgroundMusicSource == null) return;
+        backgroundMusicSource?.Stop();
     }
 
-    public static void PlaySound(SoundType sound, float volume = 1)
+    public static void PlayPredefinedSound(SoundType sound, float volume = 1)
     {
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
-
         if (clips.Length == 0)
         {
             Debug.Log("No sound found for " + sound.ToString() + " in SoundManager.cs");
             return;
         }
-
         AudioClip randomClip = clips[UnityEngine.Random.Range(0, clips.Length)];
-        instance.audioSource.PlayOneShot(randomClip, volume * instance.soundVolume * instance.soundToMusicVolume * (1 / Time.timeScale));
+        instance.audioSource.PlayOneShot(randomClip, volume * instance.GetSoundVolume());
     }
 
-    public static void PlayAudioClip(AudioClip clip, float volume = 1)
+    public static void PlaySoundEffect(AudioClip clip, float volume = 1)
     {
-        instance.audioSource.PlayOneShot(clip, volume * instance.soundVolume * instance.soundToMusicVolume * (1 / Time.timeScale));
-        instance.audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        instance.audioSource.PlayOneShot(clip, volume * instance.GetSoundVolume());
+        instance.audioSource.pitch = UnityEngine.Random.Range(1 - instance.pitchModulation / 2, 1 + instance.pitchModulation / 2);
     }
 
     public static void SetMusicVolume(float volume)
@@ -131,7 +150,12 @@ public class SoundManager : MonoBehaviour
         instance.audioSource.volume = volume;
     }
 
-    private void OnEnable()
+    void PreloadMusicClips()
+    {
+        foreach (var clip in instance.backgroundMusic) clip.LoadAudioData();
+    }
+
+    private void OnEnable() // changes inspector name to the names from enum
     {
         string[] names = Enum.GetNames(typeof(SoundType));
         Array.Resize(ref soundList, names.Length);

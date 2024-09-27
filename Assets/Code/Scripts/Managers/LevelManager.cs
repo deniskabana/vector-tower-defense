@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
         EnemySpawner.main.StartSpawning();
         isWaveInProgress = true;
 
-        SoundManager.PlaySound(SoundType.START_WAVE);
+        SoundManager.PlayPredefinedSound(SoundType.START_WAVE);
         UIManager.main.UIUpdateWave(currentWave);
     }
 
@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
     {
         isWaveInProgress = false;
         UIPlayButton.main.OnEndWave();
-        SoundManager.PlaySound(SoundType.WAVE_COMPLETED);
+        SoundManager.PlayPredefinedSound(SoundType.WAVE_COMPLETED);
         IncreaseCurrency(Mathf.FloorToInt(endWaveRewardBase * (endWaveRewardCoef * currentWave)));
     }
 
@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour
     {
         lives--;
         UIManager.main.UIUpdateLivesLeft(lives);
-        SoundManager.PlaySound(SoundType.LIFE_LOST);
+        SoundManager.PlayPredefinedSound(SoundType.LIFE_LOST);
         OnLivesChanged?.Invoke(lives);
 
         if (lives <= 0)

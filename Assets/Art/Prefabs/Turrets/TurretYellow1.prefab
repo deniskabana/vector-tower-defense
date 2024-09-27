@@ -464,7 +464,8 @@ MonoBehaviour:
   buildTime: 1
   damage: 1
   bulletTargetStyle: 0
-  shootSound: {fileID: 8300000, guid: e333c4c66846649acbb851eb86f221ad, type: 3}
+  shootSound: {fileID: 8300000, guid: 8dc6bfa66e2b547b48921a3495751440, type: 3}
+  shootVolume: 0.49
   bulletSound: {fileID: 0}
 --- !u!114 &6882965022536390315
 MonoBehaviour:

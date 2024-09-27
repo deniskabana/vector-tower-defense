@@ -82,7 +82,7 @@ public class ShopManager : MonoBehaviour
             return;
 
         HandleCurrencyChange(LevelManager.main.currency);
-        SoundManager.PlaySound(SoundType.MENU_SHOW);
+        SoundManager.PlayPredefinedSound(SoundType.MENU_SHOW);
         isShopOpen = true;
         shopPanel.SetActive(true);
         SetSelectedTower(0);
@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
     {
         shopPanel.SetActive(false);
         isShopOpen = false;
-        SoundManager.PlaySound(SoundType.MENU_CLOSE);
+        SoundManager.PlayPredefinedSound(SoundType.MENU_CLOSE);
         previousBuildingSpace?.Reset();
         buildingSpace?.Reset();
         previousBuildingSpace = null;

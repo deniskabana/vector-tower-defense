@@ -8059,7 +8059,6 @@ MonoBehaviour:
   waveText: {fileID: 2115352740}
   currencyText: {fileID: 1418129766}
   livesText: {fileID: 1946213400}
-  isUIHovered: 0
 --- !u!114 &1920774833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8098,7 +8097,7 @@ MonoBehaviour:
   soundList:
   - name: ENEMY_DEATH
     sounds:
-    - {fileID: 8300000, guid: 80fdbb0d3a05b4051b8155a8001cc1f2, type: 3}
+    - {fileID: 8300000, guid: 1137d02b6e2f84f90ac9424de3424f0a, type: 3}
   - name: LIFE_LOST
     sounds:
     - {fileID: 8300000, guid: a4902bb57f980451d92ebc50c94ff4f7, type: 3}
@@ -8121,15 +8120,13 @@ MonoBehaviour:
     sounds:
     - {fileID: 8300000, guid: c30f30409d2364890abe63d42389b534, type: 3}
   backgroundMusic:
-  - {fileID: 8300000, guid: f389f13e5567e413cbe669a9a743d071, type: 3}
   - {fileID: 8300000, guid: 84b753817a4404932801d01d76a3c115, type: 3}
   - {fileID: 8300000, guid: a3f3ae7e357b047b79b944cee628366c, type: 3}
   - {fileID: 8300000, guid: 78866718dd6e64281b7359c5cb7ae31b, type: 3}
   - {fileID: 8300000, guid: 8cd5a16e8b52148dda7349f99b99e685, type: 3}
   - {fileID: 8300000, guid: cea9a7aecbcee497fa89ef4e3c411034, type: 3}
-  - {fileID: 8300000, guid: c512f3b763a1e43e295c600884f9b3f7, type: 3}
   - {fileID: 8300000, guid: 9a79b79feda9c4d33a3f71cdc4ccf527, type: 3}
-  soundToMusicVolume: 0.7
+  maxSoundVolume: 0.65
   pitchModulation: 0.15
 --- !u!82 &1920774835
 AudioSource:
@@ -9065,7 +9062,6 @@ GameObject:
   - component: {fileID: 2027820131}
   - component: {fileID: 2027820130}
   - component: {fileID: 2027820129}
-  - component: {fileID: 2027820133}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -9159,18 +9155,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2027820133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027820128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ad88d731ace4b10bb71f521506d833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2059183625
 GameObject:
   m_ObjectHideFlags: 0

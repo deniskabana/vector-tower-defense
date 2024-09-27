@@ -13,7 +13,7 @@ public class PurchaseButton : MonoBehaviour, IPointerClickHandler
             return;
 
         ShopManager.main.PurchaseTower();
-        SoundManager.PlaySound(SoundType.UI_CLICK);
-        SoundManager.PlaySound(SoundType.SHOP_PURCHASE_FINISHED);
+        SoundManager.PlayPredefinedSound(SoundType.UI_CLICK);
+        SoundManager.PlayPredefinedSound(SoundType.SHOP_PURCHASE_FINISHED);
     }
 }
